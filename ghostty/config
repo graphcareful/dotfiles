@@ -1,0 +1,7 @@
+# Empty values reset the configuration to the default value
+
+font-family = "Source Code Pro SemiBold"
+font-size = 15
+#theme = "Ayu Mirage"
+#theme = "3024 Day"
+theme = "Afterglow"
