@@ -12,22 +12,26 @@ local function open_file_browser(opts)
 end
 
 return {
-  "nvim-telescope/telescope.nvim",
-  event = "VeryLazy",
-  opts = {
-    defaults = {
-      layout_strategy = "vertical",
-      layout_config = {
-        prompt_position = "top",
-      },
-      sorting_strategy = "ascending",
-      winblend = 0,
-    },
-  },
   {
-    "folke/flash.nvim",
+    "nvim-telescope/telescope.nvim",
+    event = "VeryLazy",
+    opts = {
+      defaults = {
+        layout_strategy = "vertical",
+        layout_config = {
+          prompt_position = "top",
+        },
+        sorting_strategy = "ascending",
+      },
+    },
     keys = {
-      { "<leader>sf", false },
+      {
+        "<leader>fh",
+        function()
+          require("telescope.builtin").find_files({ hidden = true })
+        end,
+        desc = "Find Hidden Files",
+      },
     },
   },
   {
@@ -52,5 +56,22 @@ return {
         desc = "File Dir Browser (cwd)",
       },
     },
+  },
+  {
+    "folke/flash.nvim",
+    keys = {
+      {
+        "<leader>sf",
+        function()
+          require("flash").jump({ search = { mode = "search" } })
+        end,
+        desc = "Flash Search 🔦",
+      },
+      { "<leader>sf", false },
+    },
+  },
+  {
+    "tpope/vim-fugitive",
+    event = "VeryLazy", -- lazy-load for performance
   },
 }

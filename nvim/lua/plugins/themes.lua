@@ -15,11 +15,19 @@ return {
   { "shaunsingh/nord.nvim" },
   { "UtkarshVerma/molokai.nvim" },
   { "neanias/everforest-nvim" },
-  { "EdenEast/nightfox.nvim" },
+  {
+    "EdenEast/nightfox.nvim",
+    opts = {
+      options = {
+        transparent = false,
+      },
+    },
+  },
   { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
   {
     "LazyVim/LazyVim",
     opts = {
+      -- Set the enabled default theme here
       colorscheme = "nightfox",
     },
   },
