@@ -104,6 +104,8 @@ unset PAGER
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias cd="z"
+alias cat=bat
 alias ls="ls --color"
 alias ll="eza -A --icons"
 alias lld="eza -A --icons --long --git"
@@ -113,7 +115,6 @@ alias v="cd $HOME/workspace/vector"
 alias tellme="osascript -e 'display notification \"Tagged command finished\" with title \"Terminal - Ghostty\"'"
 alias edn="cd ~/.config/nvim; nvim"
 
-# export TMUX_THEME=onedark
 export GITLAB_TOKEN=$(security find-generic-password -a ${USER} -s gitlab_token -w)
 source ~/.zshrc.local
 fpath+=(/opt/homebrew/share/zsh/site-functions)
