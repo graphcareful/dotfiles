@@ -71,7 +71,20 @@ return {
     },
   },
   {
-    "tpope/vim-fugitive",
-    event = "VeryLazy", -- lazy-load for performance
+    "NeogitOrg/neogit",
+    dependencies = {
+      "nvim-lua/plenary.nvim", -- required
+      "sindrets/diffview.nvim", -- optional - Diff integration
+    },
+    keys = {
+      {
+        "<leader>gn",
+        function()
+          local neogit = require("neogit")
+          neogit.open({ kind = "auto" })
+        end,
+        desc = "Open Neogit",
+      },
+    },
   },
 }
