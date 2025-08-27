@@ -115,6 +115,7 @@ alias edn="cd ~/.config/nvim; nvim"
 
 # export TMUX_THEME=onedark
 export GITLAB_TOKEN=$(security find-generic-password -a ${USER} -s gitlab_token -w)
+source ~/.zshrc.local
 fpath+=(/opt/homebrew/share/zsh/site-functions)
 
 # bzl reuses completion suggestions for bazel binary
@@ -145,6 +146,5 @@ export FZF_CTRL_T_OPTS="
 export FZF_ALT_C_OPTS="
   --walker-skip .git,node_modules,target
   --preview 'tree -C {}'"
-
 
 source <(fzf --zsh)
