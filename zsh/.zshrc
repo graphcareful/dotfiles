@@ -31,11 +31,11 @@ alias dog="cd $HOME/dd"
 alias v="cd $HOME/workspace/vector"
 
 export GITLAB_TOKEN=$(security find-generic-password -a ${USER} -s gitlab_token -w)
-# source "${ZDOTDIR:-$HOME}/.zshrc.local"
+source "${ZDOTDIR:-$HOME}/.zshrc.local"
 fpath+=(/opt/homebrew/share/zsh/site-functions)
 
 # bzl reuses completion suggestions for bazel binary
-# compdef _bazel bzl
+compdef _bazel bzl
 
 if type brew &>/dev/null; then
   FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
