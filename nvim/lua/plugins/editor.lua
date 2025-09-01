@@ -1,56 +1,113 @@
-local function open_file_browser(opts)
-  local telescope = require("telescope")
+local function snacks_horizontal_layout()
+  return {
+    box = "vertical",
+    backdrop = false,
+    width = 0.8,
+    height = 0.9,
+    border = "none",
+    {
+      box = "vertical",
+      {
+        win = "input",
+        height = 1,
+        border = "rounded",
+        title = "{title} {live} {flags}",
+        title_pos = "center",
+      },
+      { win = "list", title = " results ", title_pos = "center", border = "rounded" },
+    },
+    {
+      win = "preview",
+      title = "{preview:preview}",
+      border = "rounded",
+      title_pos = "center",
+    },
+  }
+end
 
-  telescope.extensions.file_browser.file_browser(vim.tbl_deep_extend("force", {
-    respect_gitignore = false,
-    hidden = true,
-    grouped = true,
-    previewer = false,
-    initial_mode = "normal",
-    layout_config = { height = 40 },
-  }, opts or {}))
+local function snacks_file_explorer_picker_layout()
+  return {
+    box = "vertical",
+    backdrop = false,
+    width = 0.7,
+    height = 0.6,
+    border = "none",
+    {
+      box = "vertical",
+      {
+        win = "input",
+        height = 1,
+        border = "rounded",
+        title = "{title} {live} {flags}",
+        title_pos = "center",
+      },
+      { win = "list", title = " results ", title_pos = "center", border = "rounded" },
+    },
+    {
+      win = "preview",
+      title = "{preview:preview}",
+      border = "rounded",
+      title_pos = "center",
+    },
+  }
 end
 
 return {
   {
-    "nvim-telescope/telescope.nvim",
-    event = "VeryLazy",
+    "folke/snacks.nvim",
     opts = {
-      defaults = {
-        layout_strategy = "vertical",
-        layout_config = {
-          prompt_position = "top",
+      picker = {
+        layout = {
+          layout = {
+            backdrop = false,
+          },
         },
-        sorting_strategy = "ascending",
+        sources = {
+          explorer = {
+            layout = {
+              preset = "sidebar",
+              layout = { position = "left" },
+            },
+          },
+          files = {
+            layout = {
+              layout = snacks_horizontal_layout(),
+            },
+          },
+          grep = {
+            layout = {
+              layout = snacks_horizontal_layout(),
+            },
+          },
+        },
       },
     },
-    keys = {
-      {
-        "<leader>fh",
-        function()
-          require("telescope.builtin").find_files({ hidden = true })
-        end,
-        desc = "Find Hidden Files",
-      },
-    },
-  },
-  {
-    "nvim-telescope/telescope-file-browser.nvim",
-    dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
+    config = function(_, opts)
+      require("snacks").setup(opts)
+      vim.api.nvim_set_hl(0, "SnacksPicker", { bg = "none", nocombine = true })
+      vim.api.nvim_set_hl(0, "SnacksPickerBorder", { fg = "#316c71", bg = "none", nocombine = true })
+    end,
     keys = {
       {
         "<leader>fd",
         function()
-          open_file_browser()
+          require("snacks.explorer").open({
+            root = true,
+            layout = {
+              layout = snacks_file_explorer_picker_layout(),
+            },
+          })
         end,
         desc = "File Dir Browser (root dir)",
       },
       {
         "<leader>fD",
         function()
-          open_file_browser({
-            path = "%:p:h",
+          require("snacks.explorer").open({
             cwd = vim.fn.expand("%:p:h"),
+            layout = {
+              layout = snacks_file_explorer_picker_layout(),
+            },
           })
         end,
         desc = "File Dir Browser (cwd)",
