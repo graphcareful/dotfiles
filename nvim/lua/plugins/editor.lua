@@ -93,6 +93,7 @@ return {
         function()
           require("snacks.explorer").open({
             root = true,
+            auto_close = true,
             layout = {
               layout = snacks_file_explorer_picker_layout(),
             },
@@ -104,6 +105,7 @@ return {
         "<leader>fD",
         function()
           require("snacks.explorer").open({
+            auto_close = true,
             cwd = vim.fn.expand("%:p:h"),
             layout = {
               layout = snacks_file_explorer_picker_layout(),
