@@ -25,33 +25,6 @@ local function snacks_horizontal_layout()
   }
 end
 
-local function snacks_file_explorer_picker_layout()
-  return {
-    box = "vertical",
-    backdrop = false,
-    width = 0.7,
-    height = 0.6,
-    border = "none",
-    {
-      box = "vertical",
-      {
-        win = "input",
-        height = 1,
-        border = "rounded",
-        title = "{title} {live} {flags}",
-        title_pos = "center",
-      },
-      { win = "list", title = " results ", title_pos = "center", border = "rounded" },
-    },
-    {
-      win = "preview",
-      title = "{preview:preview}",
-      border = "rounded",
-      title_pos = "center",
-    },
-  }
-end
-
 return {
   {
     "folke/snacks.nvim",
@@ -87,34 +60,6 @@ return {
       vim.api.nvim_set_hl(0, "SnacksPicker", { bg = "none", nocombine = true })
       vim.api.nvim_set_hl(0, "SnacksPickerBorder", { fg = "#316c71", bg = "none", nocombine = true })
     end,
-    keys = {
-      {
-        "<leader>fd",
-        function()
-          require("snacks.explorer").open({
-            root = true,
-            auto_close = true,
-            layout = {
-              layout = snacks_file_explorer_picker_layout(),
-            },
-          })
-        end,
-        desc = "File Dir Browser (root dir)",
-      },
-      {
-        "<leader>fD",
-        function()
-          require("snacks.explorer").open({
-            auto_close = true,
-            cwd = vim.fn.expand("%:p:h"),
-            layout = {
-              layout = snacks_file_explorer_picker_layout(),
-            },
-          })
-        end,
-        desc = "File Dir Browser (cwd)",
-      },
-    },
   },
   {
     "folke/flash.nvim",
