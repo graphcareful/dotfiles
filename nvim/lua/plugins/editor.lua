@@ -60,6 +60,22 @@ return {
       vim.api.nvim_set_hl(0, "SnacksPicker", { bg = "none", nocombine = true })
       vim.api.nvim_set_hl(0, "SnacksPickerBorder", { fg = "#316c71", bg = "none", nocombine = true })
     end,
+    keys = {
+      {
+        "<leader>fh",
+        function()
+          require("snacks").picker.files({ hidden = true, ignored = true })
+        end,
+        desc = "Find Files (Hidden inc.)",
+      },
+      {
+        "<leader>sf",
+        function()
+          require("snacks").picker.grep({ hidden = true, ignored = true })
+        end,
+        desc = "Grep (Hidden files)",
+      },
+    },
   },
   {
     "folke/flash.nvim",
