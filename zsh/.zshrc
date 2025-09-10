@@ -4,7 +4,6 @@
 # Authors:
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
-
 # Source Prezto.
 if [[ -s "${ZDOTDIR:-$HOME}/prezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/prezto/init.zsh"
@@ -23,9 +22,8 @@ fi
 # Set personal aliases
 alias cd="z"
 alias cat=bat
-alias ls="ls --color"
-alias ll="eza -A --icons"
-alias lld="eza -A --icons --long --git"
+alias ls="eza -A --icons"
+alias ll="eza -A --icons --long --git"
 alias opw="cd $HOME/workspace/observability-pipelines-worker"
 alias dog="cd $HOME/dd"
 alias v="cd $HOME/workspace/vector"
