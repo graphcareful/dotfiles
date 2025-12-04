@@ -109,11 +109,25 @@ return {
         desc = "Find Files (Hidden inc.)",
       },
       {
+        "<leader>fF",
+        function()
+          require("snacks").picker.files({ dirs = { vim.fn.expand("%:p:h") }, root = false })
+        end,
+        desc = "Find Files (cwd)",
+      },
+      {
         "<leader>sf",
         function()
           require("snacks").picker.grep({ hidden = true, ignored = true })
         end,
         desc = "Grep (Hidden files)",
+      },
+      {
+        "<leader>sG",
+        function()
+          require("snacks").picker.grep({ dirs = { vim.fn.expand("%:p:h") }, root = false })
+        end,
+        desc = "Live Grep (cwd)",
       },
     },
   },
