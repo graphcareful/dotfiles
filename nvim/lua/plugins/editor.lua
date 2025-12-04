@@ -161,4 +161,28 @@ return {
       },
     },
   },
+  {
+    "nvim-lualine/lualine.nvim",
+    dependencies = { "SmiteshP/nvim-navic" },
+    opts = function(_, opts)
+      -- keep whatever you have in statusline
+      opts.winbar = {
+        lualine_a = { { "filename", path = 1 } }, -- path=1 = relative, path=2 = absolute
+        lualine_c = {
+          {
+            "navic",
+            color_correction = "dynamic", -- adjusts highlight groups
+            navic_opts = { separator = " > " },
+          },
+        },
+      }
+      opts.inactive_winbar = {
+        lualine_a = { "filename" },
+      }
+    end,
+  },
+  {
+    "akinsho/bufferline.nvim",
+    enabled = false,
+  },
 }
