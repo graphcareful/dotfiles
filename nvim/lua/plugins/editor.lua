@@ -69,6 +69,10 @@ return {
   {
     "folke/snacks.nvim",
     opts = {
+      gh = {
+        -- your gh configuration comes here
+        -- or leave it empty to use the default settings
+      },
       picker = {
         layout = {
           layout = {
