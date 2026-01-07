@@ -125,6 +125,8 @@ alt-shift-3 = 'move-node-to-workspace 3'
 alt-shift-4 = 'move-node-to-workspace 4'
 alt-shift-5 = 'move-node-to-workspace 5'
 alt-shift-f = 'fullscreen'
+alt-shift-i = 'layout floating tiling'
+alt-shift-s = 'exec-and-forget screencapture -i -c'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
 alt-tab = 'workspace-back-and-forth'
