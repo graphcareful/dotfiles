@@ -27,26 +27,6 @@ end
 
 return {
   {
-    "saghen/blink.cmp",
-    opts = {
-      completion = {
-        menu = {
-          winblend = 10,
-          border = "rounded",
-          winhighlight = "Normal:BlinkCmpMenu,FloatBorder:BlinkCmpMenuBorder,CursorLine:BlinkCmpMenuSelection,Search:None",
-        },
-        documentation = {
-          window = {
-            border = "rounded",
-            winblend = 100,
-            winhighlight = "Normal:BlinkCmpDoc,FloatBorder:BlinkCmpDocBorder,EndOfBuffer:BlinkCmpDoc",
-          },
-        },
-        signature = { window = { border = "rounded", winblend = 10 } },
-      },
-    },
-  },
-  {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
@@ -54,7 +34,7 @@ return {
           settings = {
             ["rust-analyzer"] = {
               cargo = { buildScripts = { enable = true } },
-              procMacro = { enable = true },
+              procMacro = { all_targets = true, enable = true },
             },
           },
         },
