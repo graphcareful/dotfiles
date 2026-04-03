@@ -1,16 +1,3 @@
-#
-# Executes commands at the start of an interactive session.
-#
-# Authors:
-#   Sorin Ionescu <sorin.ionescu@gmail.com>
-#
-# Source Prezto.
-if [[ -s "${ZDOTDIR:-$HOME}/prezto/init.zsh" ]]; then
-  source "${ZDOTDIR:-$HOME}/prezto/init.zsh"
-fi
-
-# Customize to your needs...
-
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'
@@ -21,7 +8,7 @@ fi
 
 # Set personal aliases
 alias cd="z"
-alias cat=bat
+alias cat="bat --theme=gruvbox-dark --color=always"
 alias ls="eza -A --icons"
 alias ll="eza -A --icons --long --git"
 alias opw="cd $HOME/workspace/observability-pipelines-worker"
@@ -33,7 +20,7 @@ source "${ZDOTDIR:-$HOME}/.zshrc.local"
 fpath+=(/opt/homebrew/share/zsh/site-functions)
 
 # bzl reuses completion suggestions for bazel binary
-compdef _bazel bzl
+# compdef _bazel bzl
 
 if type brew &>/dev/null; then
   FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
@@ -53,7 +40,7 @@ export FZF_CTRL_R_OPTS="
 # Preview file content using bat (https://github.com/sharkdp/bat)
 export FZF_CTRL_T_OPTS="
   --walker-skip .git,node_modules,target
-  --preview 'bat -n --color=always {}'
+  --preview 'bat --theme=gruvbox-dark -n --color=always {}'
   --bind 'ctrl-/:change-preview-window(down|hidden|)'"
 
 # Print tree structure in the preview window
@@ -62,3 +49,4 @@ export FZF_ALT_C_OPTS="
   --preview 'tree -C {}'"
 
 source <(fzf --zsh)
+
