@@ -1,23 +1,18 @@
 #!/usr/bin/env bash
-# Runs when your workspace is created. The block below is the default behavior:
-# symlink dotfiles from your folder to your home directory. Add any extra setup
-# below (e.g. install tools, configure shell).
-set -euo pipefail
 
-DOTFILES_PATH="$HOME/dotfiles"
+echo "Creating .zshenv..."
 
-# Symlink dotfiles to home directory
-find "${DOTFILES_PATH}/" -type f -path "$DOTFILES_PATH/.*" -print0 |
-  while IFS= read -r -d '' df; do
-    if [[ "$df" == "$DOTFILES_PATH/.config/"* && "${XDG_CONFIG_HOME:-}" == /* && "${XDG_CONFIG_HOME%/}" != "$HOME/.config" ]]; then
-      link="${XDG_CONFIG_HOME%/}${df#"$DOTFILES_PATH/.config"}"
-    else
-      link=${df/$DOTFILES_PATH/$HOME}
-    fi
-    mkdir -p -- "$(dirname -- "$link")"
-    ln -sfn -- "$df" "$link"
-  done
+cat >"$HOME/.zshenv" <<'EOF'
+export ZDOTDIR="$HOME/.config/zsh"
+source "$ZDOTDIR/.zshenv"
+EOF
+
+echo "Installing useful utilities..."
+sudo apt install -y htop stow zoxide tmux eza fzf
 
 # Add your workspace setup below — e.g. install tools, configure shell, etc.
-sudo apt install -y htop stow zoxide
+echo "Installing cargo + rust runtime..."
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
+echo "Installing sesh project manager..."
 go install github.com/joshmedeski/sesh/v2@latest
