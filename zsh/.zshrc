@@ -32,8 +32,10 @@ alias opw="cd $HOME/workspace/observability-pipelines-worker"
 alias dog="cd $HOME/dd"
 alias v="cd $HOME/workspace/vector"
 
-export GITLAB_TOKEN=$(security find-generic-password -a ${USER} -s gitlab_token -w)
-source "${ZDOTDIR:-$HOME}/.zshrc.local"
+if [[ "$OSTYPE" == darwin* ]]; then
+  export GITLAB_TOKEN=$(security find-generic-password -a ${USER} -s gitlab_token -w)
+  source "${ZDOTDIR:-$HOME}/.zshrc.local"
+fi
 fpath+=(/opt/homebrew/share/zsh/site-functions)
 
 # bzl reuses completion suggestions for bazel binary
@@ -65,5 +67,10 @@ export FZF_ALT_C_OPTS="
   --walker-skip .git,node_modules,target
   --preview 'tree -C {}'"
 
-source <(fzf --zsh)
+if [[ "$OSTYPE" == darwin* ]]; then
+  source <(fzf --zsh)
+else
+  source /usr/share/doc/fzf/examples/key-bindings.zsh
+  [[ -f /usr/share/doc/fzf/examples/completion.zsh ]] && source /usr/share/doc/fzf/examples/completion.zsh
+fi
 
