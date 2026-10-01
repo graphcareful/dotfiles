@@ -2,7 +2,7 @@
 set -euo pipefail
 
 echo "Installing useful utilities..."
-sudo apt install -y htop stow zoxide tmux eza fzf
+sudo apt install -y htop stow zoxide tmux eza fzf ninja-build gettext cmake curl build-essential
 
 echo "Installing my dotfiles"
 (cd "$HOME/dotfiles" && stow --ignore='ghostty' --ignore='aerospace' --ignore='install.sh' .)
@@ -23,3 +23,11 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 
 echo "Installing sesh project manager..."
 go install github.com/joshmedeski/sesh/v2@latest
+
+if command -v nvim >/dev/null 2>&1; then
+  echo "nvim already installed, skipping..."
+else
+  echo "Installing nvim..."
+  git clone --depth 1 git@github.com:neovim/neovim.git "$HOME/neovim"
+  (cd "$HOME/neovim" && make CMAKE_BUILD_TYPE=RelWithDebInfo && sudo make install)
+fi
